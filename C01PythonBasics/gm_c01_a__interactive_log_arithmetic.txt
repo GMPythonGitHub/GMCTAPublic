@@ -1,0 +1,52 @@
+## gm_c01_a__interactive_log_arithmetic.txt: prepared by Kinya MIURA 230410
+# -----------------------------------------------------------------------------
+*** interactive log of arithmetic operations and Python basics ***
+# -----------------------------------------------------------------------------
+
+# -----------------------------------------------------------------------------
+## --- section_a: operating arithmetic calculations ---
+>>> 3 + 2
+5
+>>> 3 * 2
+6
+>>> 3 + 2, 3 * 2
+(5, 6)
+>>> 3 + 3, 3 * 2, 3 - 2, 3 / 2
+(5, 6, 1, 1.5)
+
+# -----------------------------------------------------------------------------
+## --- section_b: operating arithmetic calculations with variables ---
+>>> aa, bb = 3, 2
+>>> aa, bb
+(3, 2)
+>>> sum, sub, mul, div = aa + ba, aa - bb, aa * bb, aa / bb  # four variables
+>>> sum, sub, mul, div
+(5, 1, 6, 1.5)
+>>> (sum + sub) / 2, (sum - sub) / 2
+(3.0, 2.0)
+>>> result = aa + bb, aa - bb, aa * bb, aa / bb  # variables as 'tuple'
+>>> result
+(5, 1, 6, 1.5)
+>>> (result[0] + result[1]) / 2, (result[0] - result[1]) / 2
+(3.0, 2.0)
+
+# -----------------------------------------------------------------------------
+## --- section_c: introducing 'function' ---
+>>> def func(nn):  # returning 'tuple' including number, square and cubic
+...     square, cubic = nn * nn, nn * nn * nn  # calculating square and cube
+...     return nn, square, cubic  # returning three values
+...               # empty line is needed
+>>> func(5)
+(5, 25, 125)
+
+# -----------------------------------------------------------------------------
+## --- section_d: introducing 'for-loop' ---
+>>> for nn in range(5):  # nn = 0 -> (5-1)
+...     print(func(nn))  # printing results
+...             # empty line is needed
+0 0 0  # results of calculation
+1 1 1
+2 4 8
+3 9 27
+4 16 64
+

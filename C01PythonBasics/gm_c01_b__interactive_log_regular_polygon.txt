@@ -1,0 +1,45 @@
+## gm_c01_b__interactive_log_regular_polygon.txt: prepared by Kinya MIURA 230410
+# -----------------------------------------------------------------------------
+*** interactive log of arithmetic operations and some basics ***
+# -----------------------------------------------------------------------------
+
+# -----------------------------------------------------------------------------
+## --- section_a: triangle and square ---
+>>> side = 2  # side length
+>>> area = side * (side * 3**.5 / 2) / 2, aa * aa
+  # areas of a regular triangle and a square
+>>> area
+(1.7320508075688772, 4)
+
+# -----------------------------------------------------------------------------
+## --- section_b: importing items from standard module 'math' ---
+>>> from math import (pi, cos, sin)
+  # importing items from standard module 'math'
+>>> pi
+3.141592653589793
+>>> sin(pi/2), cos(pi)
+(1.0, -1.0)
+
+# -----------------------------------------------------------------------------
+## --- section_c: area of n-th regular polygon ---
+>>> radius= 2  # radius of circumscribed circle
+>>> nn = 3  # number of sides
+>>> theta_nn = 2 * pi / nn
+>>> area_tri = (2 * radius * sin(theta_nn/2)) * (radius * cos(theta_nn/2)) / 2
+>>> area = nn * area_tri
+>>> area
+5.196152422706633
+
+# -----------------------------------------------------------------------------
+## --- section_d: calculating a series of polygon areas ---
+>>> radius = 2  # radius of circumscribed circle
+>>> for nn in range(3,6):
+...     theta_nn = 2 * pi / nn
+...     area_tri = rr * sin(theta_nn/2) * rr * cos(theta_nn/2)
+...     area = area_tri * nn
+...     print(nn, radius, area)
+...
+3 2 5.196152422706633
+4 2 8.000000000000002
+5 2 9.510565162951536
+
