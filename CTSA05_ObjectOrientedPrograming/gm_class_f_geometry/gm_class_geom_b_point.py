@@ -5,27 +5,9 @@ print("   *** class GMVector is inherited ***")
 # ---------------------------------------------------------
 print("### --- section_module: (GMPoint) importing items from module --- ###")
 from numpy import ndarray
-'''
-(
-    deg2rad as d2r, rad2deg as r2d, cos, sin, tan, arctan2,
-    ndarray, array, inner, outer, cross )
-from numpy.linalg import norm
-'''
 import copy
 from gm_class_geom_a_vector import GMVector
 
-# ---------------------------------------------------------
-'''
-print("### --- section_function: (GMPoint) defining global functions --- ###")
-def gmcos(th: float, deg: bool = False) -> float:
-    return cos(d2r(th)) if deg else cos(th)
-def gmsin(th: float, deg: bool = False) -> float:
-    return sin(d2r(th)) if deg else sin(th)
-def gmtan(th: float, deg: bool = False) -> float:
-    return tan(d2r(th)) if deg else tan(th)
-def gmatan2(yy: float, xx: float, deg=False) -> float:
-    return r2d(arctan2(yy, xx)) if deg else arctan2(yy, xx)
-'''
 # =========================================================
 print("### --- section_class: (GMPoint) describing class --- ###")
 class GMPoint(GMVector):  # inheriting class GMVector
@@ -33,7 +15,7 @@ class GMPoint(GMVector):  # inheriting class GMVector
     def __init__(self,
             xxyy: tuple = (0., 0.), rrth: tuple = None, unit: float = 1.,
             cnv: bool = True, deg: bool = True ):
-        self.set_point(xxyy=xxyy, rrth=rrth, unit=unit, cnv=cnv, deg=deg )
+        super().__init__(xxyy=xxyy, rrth=rrth, unit=unit, cnv=cnv, deg=deg)
     ## --- section_cb: (GMPoint) setting and getting functions --- ##
     ## setting functions
     def set_point(self,

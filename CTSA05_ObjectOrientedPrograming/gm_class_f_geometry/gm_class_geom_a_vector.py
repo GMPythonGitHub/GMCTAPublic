@@ -25,9 +25,9 @@ print("### --- section_class: (GMVector) describing class --- ###")
 class GMVector():
     ## --- section_ca: (GMVector) initializing class instance --- ##
     def __init__(self,
-            xxyy: tuple = (0., 0.), rrth: tuple = None, unit: float = 1.,
+            xxyy: tuple = None, rrth: tuple = None, unit: float = None,
             cnv: bool = True, deg: bool = True ):
-        self.__xxyy, self.__unit = None, None
+        self.__xxyy, self.__unit = array([0.,0.]), 1.
         self.set_vector(xxyy, rrth, unit=unit, cnv=cnv, deg=deg)
     ## --- section_cb: (GMVector) setting and getting functions --- ##
     ## setting functions
