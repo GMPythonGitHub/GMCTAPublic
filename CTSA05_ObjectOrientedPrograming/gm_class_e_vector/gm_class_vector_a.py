@@ -12,8 +12,8 @@ print('### --- section_class: (GMVectorA) describing class --- ###')
 class GMVectorA():
     ## --- section_ca: initializing class instance --- ##
     def __init__(self,
-            xx: float = None, yy: float = None) -> None:
-        self.__xx, self.__yy = 1, 1
+            xx: float = 1, yy: float = 1) -> None:
+        self.__xx, self.__yy = None, None
         self.set_xxyy(xx=xx, yy=yy)
     ## --- section_cb: setting and getting functions --- ##
     ## setting function
@@ -22,12 +22,12 @@ class GMVectorA():
         if xx is not None: self.__xx = xx
         if yy is not None: self.__yy = yy
     ## getting functions
-        def xxyy(self) -> tuple:
-            return self.__xx, self.__yy
-    ## --- section_cd: string function for print() --- ##
+    def xxyy(self) -> tuple:
+        return self.__xx, self.__yy
+    ## --- section_cc: string function for print() --- ##
     def __str__(self) -> str:
         return f'(GMVectorA): xx = {self.__xx:g}, yy = {self.__yy:g}'
-    ## --- section_ce: functions for properties --- ##
+    ## --- section_cd: functions for properties --- ##
     def leng(self) -> float:
         return sr(sq(self.__xx)+sq(self.__yy))
     def dirc(self, deg: bool = True) -> float:
@@ -41,8 +41,10 @@ class GMVectorA():
 # =========================================================
 print('### --- section_main: (GMVectorA) main process --- ###')
 ### --- section_main: (GMVectorA) calculating vectors --- ###
+## --- section_ma: vector properties --- ##
 vect = GMVectorA(xx=4, yy=3)  # creating instance
 print(vect, f'\n{vect.unitvect() = }')
+## --- section_mb: vector properties --- ##
 vect.set_xxyy(xx=5, yy=5)  # setting instance variables
 print(vect, f'\n{vect.unitvect() = }')
 

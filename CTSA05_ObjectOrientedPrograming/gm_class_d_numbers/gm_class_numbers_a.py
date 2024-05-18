@@ -19,7 +19,7 @@ print(f'{numbs.aa = }, {numbs.bb = }')
 add, sub = (  # using instance variables
     numbs.aa + numbs.bb, numbs.aa - numbs.bb )
 print(f'{add = }, {sub = }')
-# ---------------------------------------------------------
+## --- section_mb: calculating arithmetics --- ##
 numbs.aa, numbs.bb = 7, 3  # setting instance variables
 print(f'{numbs.aa = }, {numbs.bb = }')
 add, sub = (  # using instance variables

@@ -14,9 +14,10 @@ class GMPointVector(GMPoint):  # inheriting GMPoint
     ## --- section_ca: (GMPointVector) initializing class instance --- ##
     def __init__(self,
             xxyy: tuple = (1., 1.), rrth: tuple = None, unit: float = 1.,
-            cnv: bool = True, deg: bool = True ) -> None:
+            cnv: bool = True, deg: bool = True,
+            vect: GMVector = GMVector(1., 0.)) -> None:
         super().__init__(xxyy=xxyy, rrth=rrth, unit=unit, cnv=cnv, deg=deg)
-        self._vect = GMVector(xxyy=(0., 0.), unit=1)
+        self._vect = vect
     ## --- section_cb: (GMPointVector) setting and getting functions --- ##
     ## setting functions
     def set_point_vector(self,

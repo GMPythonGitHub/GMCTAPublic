@@ -21,8 +21,8 @@ print('### --- section_class: (GMVectorD) describing class --- ###')
 class GMVectorD():
     ## --- section_ca: initializing class instance --- ##
     def __init__(self,
-            xxyy: tuple = None, rrth: tuple = None, deg: bool = True) -> None:
-        self.__xxyy = array([1, 1])
+            xxyy: tuple = (1, 1), rrth: tuple = None, deg: bool = True) -> None:
+        self.__xxyy = None
         self.set_vect(xxyy=xxyy, rrth=rrth, deg=deg)
     ## --- section_cb: setting and getting functions --- ##
     ## setting functions
@@ -74,8 +74,10 @@ class GMVectorD():
     def div(self, vct: object) -> None: self.__xxyy = self.__xxyy / self.conv(vct)
     def rdiv(self, vct: object) -> None: self.__xxyy = self.conv(vct) / self.__xxyy
     ## --- section_cg: functions for vector operator --- ##
+    # sign operators
     def __pos__(self): return GMVectorD(xxyy=+self.__xxyy)
     def __neg__(self): return GMVectorD(xxyy=-self.__xxyy)
+    # arithmetic operators
     def __add__(self, vct): return GMVectorD(xxyy=self.__xxyy+self.conv(vct))
     def __radd__(self, vct): return GMVectorD(xxyy=self.conv(vct)+self.__xxyy)
     def __sub__(self, vct): return GMVectorD(xxyy=self.__xxyy-self.conv(vct))
@@ -98,7 +100,7 @@ print('vecta:', vecta)
 vectb = GMVectorD(xxyy=(2,1))  # creating instance
 print('vectb:', vectb)
 
-print('\n-- functions')
+## --- section_mb: vector arithmetics --- ##
 print('  ------  : vect = vecta.copy()')
 vect = vecta.copy(); vect.add(2); print('vect.add(2): ', f'{vect.xxyy() = }')
 vect = vecta.copy(); vect.add((4,4)); print('vect.add((4,4)): ', f'{vect.xxyy() = }')
@@ -122,7 +124,7 @@ vect = vecta.copy(); vect.rdiv(2); print('vect.rdiv(2): ', f'{vect.xxyy() = }')
 vect = vecta.copy(); vect.rdiv((4,4)); print('vect.rdiv((4,4)): ', f'{vect.xxyy() = }')
 vect = vecta.copy(); vect.rdiv(vectb); print('vect.rdiv(vectb2): ', f'{vect.xxyy() = }')
 
-## --- section_mb: operators for vector calculation --- ##
+## --- section_mc: arithmetic operators --- ##
 print('\n-- operators')
 vect = vecta + 2; print('vect = vecta + 2: ', f'{vect.xxyy() = }')
 vect = vecta + (4,4); print('vect = vecta + (4,4): ', f'{vect.xxyy() = }')

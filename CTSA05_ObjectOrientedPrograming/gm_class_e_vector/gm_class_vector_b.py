@@ -19,9 +19,9 @@ print('### --- section_class: (GMVectorB) describing class --- ###')
 class GMVectorB():
     ## --- section_ca: initializing class instance --- ##
     def __init__(self,
-            xx: float = None, yy: float = None,
+            xx: float = 1, yy: float = 1,
             rr: float = None, th: float = None, deg: bool = True) -> None:
-        self.__xx, self.__yy = 1, 1  # instance variables
+        self.__xx, self.__yy = None, None  # instance variables
         self.set_vect(xx=xx, yy=yy, rr=rr, th=th, deg=deg)
     ## --- section_cb: setting and getting functions --- ##
     ## settinng function
@@ -57,11 +57,13 @@ class GMVectorB():
 
 # =========================================================
 print('### --- section_main: (GMVectorB) main process--- ###')
-## --- section_ma: calculating vectors --- ##
+## --- section_ma: vector properties --- ##
 vect = GMVectorB(4, 3)  # creating instance
 print(vect, f'\n{vect.unitvect() = }')
+## --- section_mb: vector properties --- ##
 vect.set_vect(xx=5, yy=5)  # setting instance variables
 print(vect, f'\n{vect.unitvect() = }')
+## --- section_mc: vectorcalculating vectors --- ##
 vect.set_vect(rr=4, th=30, deg=True)  # setting instance variables
 print(vect, f'\n{vect.unitvect() = }')
 

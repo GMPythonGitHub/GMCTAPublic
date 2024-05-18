@@ -12,7 +12,7 @@ from gm_class_geom_d_segment import (GMSegment, GMPoint)
 print("### --- section_class: (GMPolygon) describing class --- ###")
 class GMPolygon():
     ## --- section_ca: (GMPolygon) initializing class instance --- ##
-    def __init__(self, points: tuple = ((0,0),(1,0),(1,1),(0,1),)):
+    def __init__(self, points: tuple = ((0., 0.),(1., 0.),(1., 1.),(0., 1.),)):
         self._pints, self._segms = [], []
         self.set_polygon(points)
     ## --- section_cb: (GMPolygon) setting and getting functions --- ##
@@ -71,7 +71,8 @@ if __name__ == '__main__':
     print("### --- section_m: main process --- ###")
     print()
     ## --- section_ma: (GMPolygon) creating class instance --- ##
-    points = ((1,3),(4,4),(3,1),(0,0),)  # tuple of points
+    points = ((1., 3.),(4., 4.),(3., 1.),(0., 0.),)  # tuple of points
+    print(f'{points = }')
     polg = GMPolygon(points)
     print(polg.classprop('polg -> '))
     print()
@@ -103,6 +104,7 @@ if __name__ == '__main__':
     ### --- section_class: (GMPolygon) describing class --- ###
     ### --- section_m: main process --- ###
     
+    points = ((1.0, 3.0), (4.0, 4.0), (3.0, 1.0), (0.0, 0.0))
     polg -> :: GMPolygon ::
     pints[4]: GMPoint:
     **[00]:: GMPoint ::

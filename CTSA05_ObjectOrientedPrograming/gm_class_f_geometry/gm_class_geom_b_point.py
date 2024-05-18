@@ -13,7 +13,7 @@ print("### --- section_class: (GMPoint) describing class --- ###")
 class GMPoint(GMVector):  # inheriting class GMVector
     ## --- section_ca: (GMPoint) initializing class instance --- ##
     def __init__(self,
-            xxyy: tuple = (0., 0.), rrth: tuple = None, unit: float = 1.,
+            xxyy: tuple = (1., 1.), rrth: tuple = None, unit: float = 1.,
             cnv: bool = True, deg: bool = True ):
         super().__init__(xxyy=xxyy, rrth=rrth, unit=unit, cnv=cnv, deg=deg)
     ## --- section_cb: (GMPoint) setting and getting functions --- ##

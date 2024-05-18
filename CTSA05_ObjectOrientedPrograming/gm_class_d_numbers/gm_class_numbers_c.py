@@ -24,14 +24,14 @@ class GMNumbersC():
 
 # =========================================================
 print('### --- section_main: (GMMumbersC) main process --- ###')
-## --- section_m0: calculating arithmetics --- ##
+## --- section_ma: calculating arithmetics --- ##
 numbs = GMNumbersC(3, 2)  # creating instance
 # print(f'{numbs.__aa = }, {numbs.__bb = }, ')
 # AttributeError: 'GMNumbersC' object has no attribute '__aa'
 print(f'{numbs.aa() = }, {numbs.bb() = }')
 add, sub = numbs.calc()  # using instance functions
 print(f'{add = }, {sub = }')
-# ---------------------------------------------------------
+## --- section_mb: calculating arithmetics --- ##
 numbs.set_aabb(aa=7, bb=3)  # setting instance variables
 print(f'{numbs.aa() = }, {numbs.bb() = }')
 add, sub = numbs.calc()  # using instance functions

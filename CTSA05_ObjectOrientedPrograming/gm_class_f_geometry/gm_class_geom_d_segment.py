@@ -12,7 +12,9 @@ from gm_class_geom_b_point import (GMPoint, GMVector)
 print("### --- section_class: (GMSegment) describing class --- ###")
 class GMSegment():
     ## --- section_ca: (GMSegment) initializing class instance --- ##
-    def __init__(self, pinta: GMPoint, pintb: GMPoint):
+    def __init__(self,
+            pinta: GMPoint = GMPoint(xxyy=(0,0)),
+            pintb: GMPoint = GMPoint(xxyy=(1,1)) ):
         self._pinta, self._pintb = pinta, pintb
         # point A and point B
     ## --- section_cb: (GMTrussMember) setting and getting functions --- ##

@@ -20,8 +20,8 @@ print('### --- section_class: (GMVectorC) describing class --- ###')
 class GMVectorC():
     ## --- section_ca: initializing class instance --- ##
     def __init__(self,
-            xxyy: tuple = None, rrth: tuple = None, deg: bool = True) -> None:
-        self.__xxyy = array([1, 1])
+            xxyy: tuple = (1, 1), rrth: tuple = None, deg: bool = True) -> None:
+        self.__xxyy = None
         self.set_vect(xxyy=xxyy, rrth=rrth, deg=deg)
     ## --- section_cb: setting and getting functions --- ##
     ## setting functions
@@ -61,11 +61,12 @@ class GMVectorC():
 
 # =========================================================
 print('### --- section_main: (GMVectorC) main process --- ###')
-## --- section_ma: calculating vectors --- ##
-vecta = GMVectorC(xxyy=(3.,4.))  # creating instance
+## --- section_ma: creating instances --- ##
+vecta = GMVectorC(xxyy=(3,4))  # creating instance
 print('vecta:', vecta)
-vectb = GMVectorC(xxyy=(-4.,3.))  # creating instance
+vectb = GMVectorC(xxyy=(-4,3))  # creating instance
 print('vectb:', vectb)
+## --- section_mb: calculating vector products --- ##
 print(f'{vecta.inner(vectb) = }')
 print(f'{vecta.outer(vectb) = }')
 print(f'{vecta.cross(vectb) = }')

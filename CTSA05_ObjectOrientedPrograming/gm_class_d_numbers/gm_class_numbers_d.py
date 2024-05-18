@@ -32,7 +32,7 @@ numbs = GMNumbersD(3, 2)  # creating instance
 print(numbs)
 add, sub = numbs.calc()  # using instance functions
 print(f'{add = }, {sub = }')
-# ---------------------------------------------------------
+## --- section_mb: calculating arithmetics --- ##
 numbs.set_aabb(aa=7, bb=3)  # setting instance variables
 print(numbs)
 add, sub = numbs.calc()  # using instance functions

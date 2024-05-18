@@ -25,9 +25,9 @@ print("### --- section_class: (GMVector) describing class --- ###")
 class GMVector():
     ## --- section_ca: (GMVector) initializing class instance --- ##
     def __init__(self,
-            xxyy: tuple = None, rrth: tuple = None, unit: float = None,
+            xxyy: tuple = (1., 1.), rrth: tuple = None, unit: float = 1.,
             cnv: bool = True, deg: bool = True ):
-        self.__xxyy, self.__unit = array([0.,0.]), 1.
+        self.__xxyy, self.__unit = None, None
         self.set_vector(xxyy, rrth, unit=unit, cnv=cnv, deg=deg)
     ## --- section_cb: (GMVector) setting and getting functions --- ##
     ## setting functions
@@ -67,12 +67,14 @@ class GMVector():
         return idx + ':: GMVector ::\n  ' + self.__str__()
     ## --- section_cd: (GMVector) functions for properties --- ##
     def leng(self, cnv: bool = False) -> float:
-        val = norm(self.__xxyy)
-        return val / self.__unit if cnv else val
+        rr, _ = self.rrth(cnv=cnv)
+        return rr
     def dirc(self, deg: bool = False) -> float:
-        return gmatan2(self.__xxyy[1], self.__xxyy[0], deg=deg)
+        _, th = self.rrth(deg=deg)
+        return th
     def unitvect(self) -> tuple:
-        return self.__xxyy / norm(self.__xxyy)
+        dirc = self.dirc(deg=False)
+        return cos(dirc), sin(dirc)
     ## --- section_ce: (GMVector) functions for analyzing vectors --- ##
     def inner_vect(self, vect: object, cnv: bool = False) -> ndarray:  # inner product
         return inner(self.xxyy(cnv), vect.xxyy(cnv))
@@ -84,30 +86,32 @@ class GMVector():
     def conv(self, vect) -> object:
         if isinstance(vect, (int, float, complex)): return vect
         elif isinstance(vect, (tuple, list, ndarray)): return array(vect)
-        elif isinstance(vect, GMVector): return vect.xxyy()
+        elif isinstance(vect, GMVector): return vect.xxyy(False)
         else: return None
-    def add(self, vct: object) -> None: self.__xxyy = self.__xxyy + self.conv(vct)
-    def sub(self, vct: object) -> None: self.__xxyy = self.__xxyy - self.conv(vct)
+    def add(self, vct: object) -> None: self.__xxyy += self.conv(vct)
+    def sub(self, vct: object) -> None: self.__xxyy -= self.conv(vct)
     def rsub(self, vct: object) -> None: self.__xxyy = self.conv(vct) - self.__xxyy
     def mul(self, vct: object) -> None: self.__xxyy = self.__xxyy * self.conv(vct)
     def div(self, vct: object) -> None: self.__xxyy = self.__xxyy / self.conv(vct)
     def rdiv(self, vct: object) -> None: self.__xxyy = self.conv(vct) / self.__xxyy
-    ## --- section_cg: functions for vector operator --- ##
-    def __pos__(self): return GMVector(xxyy=+self.__xxyy)
-    def __neg__(self): return GMVector(xxyy=-self.__xxyy)
-    def __add__(self, vct): return GMVector(xxyy=self.__xxyy+self.conv(vct))
-    def __radd__(self, vct): return GMVector(xxyy=self.conv(vct)+self.__xxyy)
-    def __sub__(self, vct): return GMVector(xxyy=self.__xxyy-self.conv(vct))
-    def __rsub__(self, vct): return GMVector(xxyy=self.conv(vct)-self.__xxyy)
-    def __mul__(self, vct): return GMVector(xxyy=self.__xxyy*self.conv(vct))
-    def __rmul__(self, vct): return GMVector(xxyy=self.conv(vct)*self.__xxyy)
-    def __truediv__(self, vct): return GMVector(xxyy=self.__xxyy/self.conv(vct))
-    def __rtruediv__(self, vct): return GMVector(xxyy=self.conv(vct)/self.__xxyy)
+    ## --- section_cg: overriding operators for GMVector --- ##
+    # sign operators
+    def __pos__(self): return GMVector(xxyy=+self.__xxyy, unit=self.__unit, cnv=False)
+    def __neg__(self): return GMVector(xxyy=-self.__xxyy, unit=self.__unit, cnv=False)
+    # arithmetic operators
+    def __add__(self, vct): return GMVector(xxyy=self.__xxyy+self.conv(vct), unit=self.__unit, cnv=False)
+    def __radd__(self, vct): return GMVector(xxyy=self.conv(vct)+self.__xxyy, unit=self.__unit, cnv=False)
+    def __sub__(self, vct): return GMVector(xxyy=self.__xxyy-self.conv(vct), unit=self.__unit, cnv=False)
+    def __rsub__(self, vct): return GMVector(xxyy=self.conv(vct)-self.__xxyy, unit=self.__unit, cnv=False)
+    def __mul__(self, vct): return GMVector(xxyy=self.__xxyy*self.conv(vct), unit=self.__unit, cnv=False)
+    def __rmul__(self, vct): return GMVector(xxyy=self.conv(vct)*self.__xxyy, unit=self.__unit, cnv=False)
+    def __truediv__(self, vct): return GMVector(xxyy=self.__xxyy/self.conv(vct), unit=self.__unit, cnv=False)
+    def __rtruediv__(self, vct): return GMVector(xxyy=self.conv(vct)/self.__xxyy, unit=self.__unit, cnv=False)
     # cumulative assignment operaters
-    def __iadd__(self, vct): self.__xxyy = self.__xxyy+self.conv(vct); return self
-    def __isub__(self, vct): self.__xxyy = self.__xxyy-self.conv(vct); return self
-    def __imul__(self, vct): self.__xxyy = self.__xxyy*self.conv(vct); return self
-    def __itruediv__(self, vct): self.__xxyy = self.__xxyy/self.conv(vct); return self
+    def __iadd__(self, vct): self.__xxyy += self.conv(vct); return self
+    def __isub__(self, vct): self.__xxyy -= self.conv(vct); return self
+    def __imul__(self, vct): self.__xxyy *= self.conv(vct); return self
+    def __itruediv__(self, vct): self.__xxyy /= self.conv(vct); return self
 
 # =========================================================
 if __name__ == '__main__':
@@ -117,24 +121,61 @@ if __name__ == '__main__':
     vecta = GMVector(xxyy=(1.,0.), unit=1.); print(vecta.classprop('vecta -> '))
     vectb = GMVector(xxyy=(0.,1.), unit=1.); print(vectb.classprop('vectb -> '))
     print()
-    ## --- section_mb: (GMVector) calculating vector properties --- ##
+    ## --- section_mb: (GMVector) vector properties --- ##
     print(f'{vecta.leng() = }')
     print(f'{vecta.dirc() = }')
     print(f'{vecta.unitvect() = }')
     print()
-    ## --- section_mc: (GMVector) calculating vector products --- ##
+    ## --- section_mc: (GMVector) vector products --- ##
     print(f'{vecta.inner_vect(vectb) = }')
     print(f'{vecta.outer_vect(vectb) = }')
     print(f'{vecta.cross_vect(vectb) = }')
     print()
-    ## --- section_md: (GMVector) calculating vector arithmetics --- ##
-    vecta.add((1.,1.)); print(vecta.classprop('vecta -> '))
-    vectb.add((1.,1.)); print(vectb.classprop('vectb -> '))
+    ## --- section_md: (GMVector) arithmetic operators --- ##
+    vecta.add((1.,1.)); print(vecta.classprop('vecta.add(1.,1.) -> '))
+    vectb.add((1.,1.)); print(vectb.classprop('vectb.add(1.,1.) -> '))
+    print('  ------  : vect = vecta.copy()')
     vectc = vecta + vectb; print('vecta + vectb = ', vectc)
     vectc = vecta - vectb; print('vecta - vectb = ', vectc)
     vectc = vecta * vectb; print('vecta * vectb = ', vectc)
     vectc = vecta / vectb; print('vecta / vectb = ', vectc)
+    print()
+    ## --- section_me: (GMVector) cumulative assingment operators --- ##
+    print('  ------  : vect = vecta.copy()')
+    vectc = vecta.copy(); vectc += vectb; print(vectc.classprop('vecta += vectb -> '))
+    vectc = vecta.copy(); vectc += - vectb; print(vectc.classprop('vecta += - vectb -> '))
+    vectc = vecta.copy(); vectc -= vectb; print(vectc.classprop('vecta -= vectb -> '))
+    vectc = vecta.copy(); vectc -= - vectb; print(vectc.classprop('vecta -= - vectb -> '))
+    vectc = vecta.copy(); vectc *= vectb; print(vectc.classprop('vecta *= vectb -> '))
+    vectc = vecta.copy(); vectc *= - vectb; print(vectc.classprop('vecta *= - vectb -> '))
+    vectc = vecta.copy(); vectc /= vectb; print(vectc.classprop('vecta /= vectb -> '))
+    vectc = vecta.copy(); vectc /= - vectb; print(vectc.classprop('vecta /= - vectb -> '))
 
+    '''
+    vecta = GMVector(xxyy=(2.,1.), unit=2.); print(vecta.classprop('vecta -> '))
+    vectb = GMVector(xxyy=(1.,0.5), unit=10.); print(vectb.classprop('vectb -> '))
+    print()
+    vectc = vecta.copy(); vectc.add(vectb); print(vectc.classprop('vectc -> '))
+    vectc = vecta.copy(); vectc.sub(vectb); print(vectc.classprop('vectc -> '))
+    vectc = vecta.copy(); vectc.rsub(vectb); print(vectc.classprop('vectc -> '))
+    vectc = vecta.copy(); vectc.mul(vectb); print(vectc.classprop('vectc -> '))
+    vectc = vecta.copy(); vectc.div(vectb); print(vectc.classprop('vectc -> '))
+    vectc = vecta.copy(); vectc.rdiv(vectb); print(vectc.classprop('vectc -> '))
+    print()
+    vectc = vecta.copy(); vectc += vectb; print(vectc.classprop('vecta += vectb -> '))
+    vectc = vecta.copy(); vectc += - vectb; print(vectc.classprop('vecta += - vectb -> '))
+    vectc = vecta.copy(); vectc -= vectb; print(vectc.classprop('vecta -= vectb -> '))
+    vectc = vecta.copy(); vectc -= - vectb; print(vectc.classprop('vecta -= - vectb -> '))
+    vectc = vecta.copy(); vectc *= vectb; print(vectc.classprop('vecta *= vectb -> '))
+    vectc = vecta.copy(); vectc *= - vectb; print(vectc.classprop('vecta *= - vectb -> '))
+    vectc = vecta.copy(); vectc /= vectb; print(vectc.classprop('vecta /= vectb -> '))
+    vectc = vecta.copy(); vectc /= - vectb; print(vectc.classprop('vecta /= - vectb -> '))
+    print()
+    vectc = vecta + vectb; print(vectc.classprop('vectc -> '))
+    vectc = vecta - vectb; print(vectc.classprop('vectc -> '))
+    vectc = vecta * vectb; print(vectc.classprop('vectc -> '))
+    vectc = vecta / vectb; print(vectc.classprop('vectc -> '))
+    '''
     # =========================================================
     # terminal log / terminal log / terminal log /
     '''

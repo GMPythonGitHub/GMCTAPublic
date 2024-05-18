@@ -23,7 +23,7 @@ numbs.aa, numbs.bb = 3, 2
 print(f'{numbs.aa = }, {numbs.bb = }')
 add, sub = numbs.calc()  # using instance functions
 print(f'{add = }, {sub = }')
-# ---------------------------------------------------------
+## --- section_mb: calculating arithmetics --- ##
 numbs.aa, numbs.bb = 7, 3  # setting instance valuables
 print(f'{numbs.aa = }, {numbs.bb = }')
 add, sub = numbs.calc()  # using instance functions
