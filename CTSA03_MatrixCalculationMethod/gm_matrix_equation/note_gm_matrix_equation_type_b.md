@@ -92,7 +92,7 @@
 
 ### [gm_matrix_equation_b0_xx_list.py](gm_matrix_equation_b0_xx_list.py)
 
-### **[section_setting]**
+### **[section_setting]**  マトリックス方程式の設定
 マトリックス $aa$と，左辺ベクトル $xx$，右辺ベクトル $bb$ をlistで記述します。
 ```python
 print('\n*** Matrix Equation with list: aa * xx = bb; find xx ***')
@@ -116,7 +116,7 @@ rank = len(bb)
 ２つのマトリックス $A$ とベクトル $B$ を用意することによって２種類の行列方程式を扱います。
 マトリックスの切り替えは， aa = aa1 の記述を変更することによって可能です。
 
-### **[section_solving]**
+### **[section_solving]**  マトリックス方程式の解法
 「掃き出し法」により，解を求めます。
 ```python
 print('### --- section_solving --- ###')
@@ -154,7 +154,7 @@ print(f'{aa = }\n{xx = }\n{bb = }')
 
 ### [gm_matrix_equation_a1_bb_array.py](gm_matrix_equation_a1_bb_array.py)
 
-### **[section_setting]**
+### **[section_setting]**  マトリックス方程式の設定
 マトリックス $aa$ と左辺ベクトル $xx$ ，右辺ベクトル $bb$ をndarrayで記述します。
 ```python
 print('\n*** Matrix Equation with array: aa * xx = bb; find xx ***')
@@ -180,7 +180,7 @@ rank = len(bb)
 ```
 関数array()はlistやtupleをndarrayへ変換します。
 
-### **[section_solving]**
+### **[section_solving]**  マトリックス方程式の解法
 マトリックス $aa$ とベクトル $xx$ の積（ドット積）を計算しています。
 ```python
 print('### --- section_solving --- ###')
@@ -216,7 +216,7 @@ listを用いる場合と比べてプログラムをより簡潔に記述でき�
 
 ### [gm_matrix_equation_b2_xx_array_func.py](gm_matrix_equation_b2_xx_array_func.py)
 
-### **[section_setting]**
+### **[section_setting]**  マトリックス方程式の設定
 前のプログラムと同様に，行列方程式をndarrayで記述しています。
 ```python
 print('\n*** Matrix Equation with array func: aa * xx = bb; find xx ***')
@@ -240,7 +240,7 @@ bb = array(bb1, dtype='float64')
 ```
 関数array()はlistとtupleをndarrayへ変換します。
 
-### **[section_solving]**
+### **[section_solving]**  マトリックス方程式の解法
 マトリックス $aa$ とベクトル $xx$ の積（ドット積）を計算しています。
 ```python
 print('### --- section_solving --- ###')

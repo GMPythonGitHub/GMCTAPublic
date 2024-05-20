@@ -15,15 +15,18 @@ class GMPointVector(GMPoint):  # inheriting GMPoint
     def __init__(self,
             xxyy: tuple = (1., 1.), rrth: tuple = None, unit: float = 1.,
             cnv: bool = True, deg: bool = True,
-            vect: GMVector = GMVector(1., 0.)) -> None:
+            vect: GMVector = GMVector(xxyy=(1,0)) ) -> None:
         super().__init__(xxyy=xxyy, rrth=rrth, unit=unit, cnv=cnv, deg=deg)
-        self._vect = vect
+        self._vect = None  # vector with initial point: GMVector
+        self.set_point_vector(vect=vect)
     ## --- section_cb: (GMPointVector) setting and getting functions --- ##
     ## setting functions
     def set_point_vector(self,
             xxyy: tuple = None, rrth: tuple = None, unit: float = None,
-            cnv: bool = True, deg: bool = True ) -> None:
+            cnv: bool = True, deg: bool = True,
+            vect: GMVector = None) -> None:
         self.set_point(xxyy=xxyy, rrth=rrth, unit=unit, cnv=cnv, deg=deg)
+        if vect is not None: self._vect = vect
     ## getting functions
     def copy(self) -> object:
         return copy.deepcopy(self)
@@ -35,14 +38,14 @@ class GMPointVector(GMPoint):  # inheriting GMPoint
             idx + ':: GMPointVector ::\n'
             + self.__str__() + '\n'
             + '  vect: GMVector: ' + self._vect.__str__() + '' )
-    ## --- section_cd: (GMPoint) calculating position vector --- ##
+    ## --- section_cd: (GMPointVector) analysing vectors --- ##
     def vect_ot(self) -> GMVector:
         return  self + self._vect
-    def inner_op_v(self, cnv: bool = False) -> ndarray:
+    def inner_op_pt(self, cnv: bool = True) -> float:
         return self.inner_op_vect(self._vect, cnv)
-    def outer_op_v(self, cnv: bool = False) -> ndarray:
+    def outer_op_pt(self, cnv: bool = True) -> ndarray:
         return self.outer_op_vect(self._vect, cnv)
-    def cross_op_v(self, cnv: bool = False) -> ndarray:
+    def cross_op_pt(self, cnv: bool = True) -> float:
         return self.cross_op_vect(self._vect, cnv)
 
 # =========================================================
@@ -56,9 +59,9 @@ if __name__ == '__main__':
     print()
     ## --- section_mb: (GMPointVector) calculating vector properties --- ##
     print(pintvecta.vect_ot().classprop('pintvecta.vect_2t() -> '))
-    print(f'{pintvecta.inner_op_v() = }')
-    print(f'{pintvecta.outer_op_v() = }')
-    print(f'{pintvecta.cross_op_v() = }')
+    print(f'{pintvecta.inner_op_pt() = }')
+    print(f'{pintvecta.outer_op_pt() = }')
+    print(f'{pintvecta.cross_op_pt() = }')
 
     # =========================================================
     # terminal log / terminal log / terminal log /

@@ -15,7 +15,7 @@ class GMPoint(GMVector):  # inheriting class GMVector
     def __init__(self,
             xxyy: tuple = (1., 1.), rrth: tuple = None, unit: float = 1.,
             cnv: bool = True, deg: bool = True ):
-        super().__init__(xxyy=xxyy, rrth=rrth, unit=unit, cnv=cnv, deg=deg)
+        super().__init__(xxyy=xxyy, rrth=rrth, unit=unit, cnv=cnv, deg=deg)  # calling parent class
     ## --- section_cb: (GMPoint) setting and getting functions --- ##
     ## setting functions
     def set_point(self,
@@ -30,7 +30,7 @@ class GMPoint(GMVector):  # inheriting class GMVector
         return '(GMVector) ' + super().__str__()
     def classprop(self, idx: str = '') -> str:
         return idx + ':: GMPoint ::\n  ' + self.__str__()
-    ## --- section_cd: (GMPoint) functions for analyzing points --- ##
+    ## --- section_cd: (GMPoint) calculating properties --- ##
     def vect_p2pint(self, pint: object) -> GMVector:
         return pint - self
     def dist_p2pint(self, pint: object, cnv: bool = False) -> float:
@@ -39,15 +39,15 @@ class GMPoint(GMVector):  # inheriting class GMVector
     def dirc_p2pint(self, pint: object, deg: bool = False) -> float:
         vct = self.vect_p2pint(pint)
         return vct.dirc(deg)
-    def unitvect_p2pint(self, pint: object) -> ndarray:
+    def unitvect_p2pint(self, pint: object) -> tuple:
         vct = self.vect_p2pint(pint)
         return vct.unitvect()
-    ## --- section_ce: (GMVector) functions for analyzing vectors --- ##
-    def inner_op_vect(self, vect: object, cnv: bool = False) -> ndarray:  # inner product
+    ## --- section_ce: (GMVector) analyzing vectors --- ##
+    def inner_op_vect(self, vect: object, cnv: bool = True) -> float:  # inner product
         return self.inner_vect(vect, cnv=cnv)
-    def outer_op_vect(self, vect: object, cnv: bool = False) -> ndarray:  # outer product
+    def outer_op_vect(self, vect: object, cnv: bool = True) -> ndarray:  # outer product
         return self.outer_vect(vect, cnv=cnv)
-    def cross_op_vect(self, vect: object, cnv: bool = False) -> ndarray:  # cross product
+    def cross_op_vect(self, vect: object, cnv: bool = True) -> float:  # cross product
         return self.cross_vect(vect, cnv=cnv)
 
 # =========================================================

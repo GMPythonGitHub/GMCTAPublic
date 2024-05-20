@@ -13,7 +13,8 @@ print("### --- section_class: (GMPolygon) describing class --- ###")
 class GMPolygon():
     ## --- section_ca: (GMPolygon) initializing class instance --- ##
     def __init__(self, points: tuple = ((0., 0.),(1., 0.),(1., 1.),(0., 1.),)):
-        self._pints, self._segms = [], []
+        self._pints = None  # list of polygon points [GMPoint]
+        self._segms = None  # list of polygon sides [GMSegment]
         self.set_polygon(points)
     ## --- section_cb: (GMPolygon) setting and getting functions --- ##
     ## setting functions
@@ -39,31 +40,31 @@ class GMPolygon():
         for i, segm in enumerate(self._segms):
             st += '\n' + segm.classprop(f'**[{i:02d}]')
         return st
-    ## --- section_cd: (GMPolygon) functions for properties --- ##
-    def grav_ctr(self) -> ndarray:
+    ## --- section_cd: (GMPolygon) calculating properties --- ##
+    def grav_ctr(self, cnv: bool = True) -> ndarray:  # gravity center
         grav_ctr = array([0.,0.])
         for pint in self._pints:
-            grav_ctr += pint.xxyy()
+            grav_ctr += pint.xxyy(cnv=cnv)
         return grav_ctr / len(self._pints)
-    def leng(self) -> float:
+    def leng(self, cnv: bool = True) -> float:  # total length of polygon sides
         leng = 0.
         for segm in self._segms:
-            leng += segm.leng()
+            leng += segm.leng(cnv=cnv)
         return leng
-    def area_prod(self) -> float:  # area from cross product
+    def area_prod(self, cnv: bool = True) -> float:  # area of polygon from cross product
         area = 0.
         for segm in self._segms:
-            area += segm.cross_oa_ob()
+            area += segm.cross_oa_ob(cnv=cnv)
         return abs(area) / 2.
-    def area_projx(self) -> float:  # area from projection to x-axis
+    def area_projx(self, cnv: bool = True) -> float:  # area of polygon from projection to x-axis
         area = 0.
         for segm in self._segms:
-            area += segm.projx()
+            area += segm.projx(cnv=cnv)
         return abs(area)
-    def area_projy(self) -> float:  # area from projection in y-dir.
+    def area_projy(self, cnv: bool = True) -> float:  # area of polygon from projection to y-axis.
         area = 0.
         for segm in self._segms:
-            area += segm.projy()
+            area += segm.projy(cnv=cnv)
         return abs(area)
 
 # =========================================================

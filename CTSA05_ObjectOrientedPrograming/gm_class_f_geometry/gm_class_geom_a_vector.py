@@ -27,7 +27,9 @@ class GMVector():
     def __init__(self,
             xxyy: tuple = (1., 1.), rrth: tuple = None, unit: float = 1.,
             cnv: bool = True, deg: bool = True ):
-        self.__xxyy, self.__unit = None, None
+        ''' vector; (x, y) in ractangular coord. sys.; (r, theta) in circular coord. sys. '''
+        self.__xxyy = None  # components of vector in rectangular coord. sys. (x, y): ndarray
+        self.__unit = None  # coefficient for unit conversion: float
         self.set_vector(xxyy, rrth, unit=unit, cnv=cnv, deg=deg)
     ## --- section_cb: (GMVector) setting and getting functions --- ##
     ## setting functions
@@ -65,7 +67,7 @@ class GMVector():
             f'xxyy = {xxyy} : rrth = {rrth} : unit = {self.__unit:g}' )
     def classprop(self, idx: str = '') -> str:
         return idx + ':: GMVector ::\n  ' + self.__str__()
-    ## --- section_cd: (GMVector) functions for properties --- ##
+    ## --- section_cd: (GMVector) calculating properties --- ##
     def leng(self, cnv: bool = False) -> float:
         rr, _ = self.rrth(cnv=cnv)
         return rr
@@ -75,12 +77,12 @@ class GMVector():
     def unitvect(self) -> tuple:
         dirc = self.dirc(deg=False)
         return cos(dirc), sin(dirc)
-    ## --- section_ce: (GMVector) functions for analyzing vectors --- ##
-    def inner_vect(self, vect: object, cnv: bool = False) -> ndarray:  # inner product
+    ## --- section_ce: (GMVector) analyzing vectors --- ##
+    def inner_vect(self, vect: object, cnv: bool = True) -> float:  # inner product
         return inner(self.xxyy(cnv), vect.xxyy(cnv))
-    def outer_vect(self, vect: object, cnv: bool = False) -> ndarray:  # outer product
+    def outer_vect(self, vect: object, cnv: bool = True) -> ndarray:  # outer product
         return outer(self.xxyy(cnv), vect.xxyy(cnv))
-    def cross_vect(self, vect: object, cnv: bool = False) -> ndarray:  # cross product
+    def cross_vect(self, vect: object, cnv: bool = True) -> float:  # cross product
         return cross(self.xxyy(cnv), vect.xxyy(cnv))
     ## --- section_cf: (GMVector) functions for vector arithmetics --- ##
     def conv(self, vect) -> object:

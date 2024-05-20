@@ -15,25 +15,28 @@ class GMSegment():
     def __init__(self,
             pinta: GMPoint = GMPoint(xxyy=(0,0)),
             pintb: GMPoint = GMPoint(xxyy=(1,1)) ):
-        self._pinta, self._pintb = pinta, pintb
-        # point A and point B
-    ## --- section_cb: (GMTrussMember) setting and getting functions --- ##
+        self._pinta = None  # end point A: GMPoint
+        self._pintb = None  # end point B: GMPoint
+        self.set_segment(pinta=pinta, pintb=pintb)
+    ## --- section_cb: (GMSegment) setting and getting functions --- ##
     ## setting functions
-    def set_truss_member(self) -> None:
-        pass
+    def set_segment(self,
+            pinta: GMPoint = None, pintb: GMPoint = None) -> None:
+        if pinta is not None: self._pinta = pinta
+        if pintb is not None: self._pintb = pintb
     ## getting functions
     def copy(self) -> object:
         return copy.deepcopy(self)
     ## --- section_cc: (GMSegment) string function for print() --- ##")
     def __str__(self) -> str:
-        return ''
+        return (
+              '  pinta: GMPoint: ' + self._pinta.__str__() + '\n'
+            + '  pintb: GMPoint: ' + self._pintb.__str__() + '' )
+
     def classprop(self, idx: str = '') -> str:
         return (
-            idx + ':: GMSegment ::\n'
-            # print(self.__str__())
-            + '  pinta: GMPoint: ' + self._pinta.__str__() + '\n'
-            + '  pintb: GMPoint: ' + self._pintb.__str__() + '' )
-    ## --- section_cd: (GMSegment) functions for properties --- ##
+            idx + ':: GMSegment ::\n' + self.__str__() )
+    ## --- section_cd: (GMSegment) calculating properties --- ##
     def vect_a2b(self) -> GMVector:  # vector from pinta to pintb
         return self._pinta.vect_p2pint(self._pintb)
     def vect_b2a(self) -> GMVector:  # vector from pintb to pinta
@@ -44,29 +47,30 @@ class GMSegment():
         return self._pinta.dirc_p2pint(self._pintb, deg=False)
     def dirc_b2a(self, deg: bool = True) -> float:  # direction from pintb to pinta
         return self._pintb.dirc_p2pint(self._pinta, deg=False)
-    def unitvect_a2b(self) -> ndarray:  # unit vector from pinta to pintb
+    def unitvect_a2b(self) -> tuple:  # unit vector from pinta to pintb
         return self._pinta.unitvect_p2pint(self._pintb)
-    def unitvect_b2a(self) -> ndarray:  # unit vector from pintb to pinta
+    def unitvect_b2a(self) -> tuple:  # unit vector from pintb to pinta
         return self._pintb.unitvect_p2pint(self._pinta)
-
-    ## --- section_ce: (GMSegment) calculating properties --- ##
-    def inner_oa_ob(self) -> ndarray:  # inner product between vectoa and vectob
-        return self._pinta.inner_op_vect(self._pintb)
-    def outer_oa_ob(self) -> ndarray:  # outer product form vectoa to vectob
-        return self._pinta.outer_op_vect(self._pintb)
-    def outer_ob_oa(self) -> ndarray:  # outer product form vectob to vectoa
-        return self._pintb.outer_op_vect(self._pinta)
-    def cross_oa_ob(self) -> ndarray:  # cross product form vectoa to vectob
-        return self._pinta.cross_op_vect(self._pintb)
-    def cross_ob_oa(self) -> ndarray:  # cross product form vectob to vectoa
-        return self._pintb.cross_op_vect(self._pinta)
-    def projx(self) -> float:  # projection area to x-axis
-        axx, ayy = self._pinta.xxyy()
-        bxx, byy = self._pintb.xxyy()
+    ## --- section_ce: (GMSegment) analysing vectors --- ##
+    def inner_oa_ob(self, cnv: bool = True) -> float:  # inner product between vectoa and vectob
+        return self._pinta.inner_op_vect(self._pintb, cnv=cnv)
+    def inner_ob_oa(self, cnv: bool = True) -> float:  # inner product between vectoa and vectob
+        return self._pintb.inner_op_vect(self._pinta, cnv=cnv)
+    def outer_oa_ob(self, cnv: bool = True) -> ndarray:  # outer product form vectoa to vectob
+        return self._pinta.outer_op_vect(self._pintb, cnv=cnv)
+    def outer_ob_oa(self, cnv: bool = True) -> ndarray:  # outer product form vectob to vectoa
+        return self._pintb.outer_op_vect(self._pinta, cnv=cnv)
+    def cross_oa_ob(self, cnv: bool = True) -> float:  # cross product form vectoa to vectob
+        return self._pinta.cross_op_vect(self._pintb, cnv=cnv)
+    def cross_ob_oa(self, cnv: bool = True) -> float:  # cross product form vectob to vectoa
+        return self._pintb.cross_op_vect(self._pinta, cnv=cnv)
+    def projx(self, cnv: bool = True) -> float:  # projection area to x-axis
+        axx, ayy = self._pinta.xxyy(cnv=cnv)
+        bxx, byy = self._pintb.xxyy(cnv=cnv)
         return (bxx - axx) * (ayy + byy) / 2
-    def projy(self) -> float:  # projection area to y-axis
-        axx, ayy = self._pinta.xxyy()
-        bxx, byy = self._pintb.xxyy()
+    def projy(self, cnv: bool = True) -> float:  # projection area to y-axis
+        axx, ayy = self._pinta.xxyy(cnv=cnv)
+        bxx, byy = self._pintb.xxyy(cnv=cnv)
         return (byy - ayy) * (axx + bxx) / 2
 
 # =============================================================================

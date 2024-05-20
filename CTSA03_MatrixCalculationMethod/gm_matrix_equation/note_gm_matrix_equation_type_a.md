@@ -1,4 +1,4 @@
-# **Note on matrix equation: Type A; vector $X$ is given**
+# **Note on matrix equation: Type A; vector X is given**
 
 ## 行列方程式の解法
 ここでは，右辺のベクトル $B$ が未知である，２つの行列方程式を考えます。
@@ -44,7 +44,7 @@
 
 ### [gm_matrix_equation_a0_bb_list.py](gm_matrix_equation_a0_bb_list.py)
 
-### **[section_setting]**
+### **[section_setting]**  マトリックス方程式の設定
 マトリックス $aa$と，左辺ベクトル $xx$，右辺ベクトル $bb$ をlistで記述します。
 ```python
 print('*** Matrix Equation with list: aa * xx = bb; xx is given ***')
@@ -63,7 +63,7 @@ rank = len(bb)
 ２つのマトリックスを用意することによって２種類の行列方程式を扱います。
 マトリックスの切り替えは， aa = aa1 の記述を変更することによって可能です。
 
-### **[section_solving]**
+### **[section_solving]**  マトリックス方程式の解法
 マトリックス $aa$ とベクトル $xx$ の積（ドット積）を２重for-loopで計算しています。
 ```python
 print('### --- section_solving --- ###')
@@ -80,7 +80,7 @@ bb[i]の値をゼロで初期化した後に，aa[i][j]とxx[j]の積を加算�
 
 ### [gm_matrix_equation_a1_bb_array.py](gm_matrix_equation_a1_bb_array.py)
 
-### **[section_setting]**
+### **[section_setting]**  マトリックス方程式の設定
 マトリックス $aa$ と左辺ベクトル $xx$ ，右辺ベクトル $bb$ をndarrayで記述します。
 ```python
 print('### --- section_module: importing items from module --- ###')
@@ -101,7 +101,7 @@ bb = array(bb, dtype='float64')
 ```
 関数array()はlistやtupleをndarrayへ変換します。
 
-### **[section_solving]**
+### **[section_solving]**  マトリックス方程式の解法
 マトリックス $aa$ とベクトル $xx$ の積（ドット積）を計算しています。
 ```python
 print('### --- section_solving --- ###')
@@ -132,11 +132,12 @@ print(abs(b))
 ndarrayと数値変数の演算では，数値変数がndarrayのすべての要素に作用します。
 また，darray同士の演算（要素数が同じである必要がある）では，対応する各要同士で演算が行われます。
 
+
 ---
 
 ### [gm_matrix_equation_a2_bb_array_func.py](gm_matrix_equation_a2_bb_array_func.py)
 
-### **[section_setting]**
+### **[section_setting]**  マトリックス方程式の設定
 前のプログラムと同様に，行列方程式をndarrayで記述しています。
 ```python
 print('### --- section_module: importing items from module --- ###')
@@ -157,7 +158,7 @@ bb = array(bb, dtype='float64')
 ```
 関数array()はlistとtupleをndarrayへ変換します。
 
-### **[section_solving]**
+### **[section_solving]**  マトリックス方程式の解法
 マトリックス $aa$ とベクトル $xx$ の積（ドット積）を計算しています。
 ```python
 print('### --- section_solving --- ###')

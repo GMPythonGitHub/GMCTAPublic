@@ -26,11 +26,11 @@
 そのうち２つの節点0と1が，構造物を支持する支点になります。
 また，水平外力 $F$ が節点2に作用しています。
 
-![](_img/gm_matrix_equation_truss_exsample.gif)
+![](_img/gm_matrix_equation_truss_example.gif)
 
 マトリックス構造解析に基づいて計算すると，この構造の変形挙動は次に示す,行列方程式で記述されます。
 
-![](_img/gm_matrix_equation_equation1.gif)
+![](_img/gm_matrix_equation_truss_example_mtxeq.gif)
 
 すべての節点は $x$ , $y$ 方向に２成分の自由度を持ち，全体では自由度が $N(=4 \times 2=8)$ になります。
 したがって，上に示したように剛性マトリックス $[S]$ のサイズは $8 \times 8$，
@@ -52,7 +52,7 @@
 以下の３タイプの,行列方程式の固定条件に対応できるように，
 複数のプログラムを段階的に作成して解説していきます。
 
-### [タイプ $A1, A2$：ベクトル $X$ が既知，ベクトル $B$ が未知](note_gm_matrix_equation_type_a.md)
+### [タイプ A1, A2：ベクトル X が既知，ベクトル B が未知](note_gm_matrix_equation_type_a.md)
 次に示す，２つの対応の行列方程式，TypeA1とTypeA2 を対象としてプログラミングします。
 
 ![](_img/gm_matrix_equation_type_a1.gif)
@@ -61,7 +61,7 @@
 
 左辺のマトリックス $A$ とベクトル $X$ のドット積を計算して，ベクトル $B$ を求めます。
 
-### [タイプ $B1, B2$ ：ベクトル $X$ が未知，ベクトル $B$ が既知](note_gm_matrix_equation_type_b.md)
+### [タイプ B1, B2 ：ベクトル X が未知，ベクトル B が既知](note_gm_matrix_equation_type_b.md)
 次に示す，２つの対応の行列方程式，TypeB1とTypeB2 を対象としてプログラミングします。
 
 ![](_img/gm_matrix_equation_type_b1.gif)
@@ -72,7 +72,7 @@
 左辺のベクトル $X$ を求めます。
 ここでは，「掃き出し法」により解を求める方法を紹介します。
 
-### [タイプ $C1, C2$ ：ベクトル $X$ とベクトル $B$ の一部が既知](note_gm_matrix_equation_type_c.md)
+### [タイプ C1, C2 ：ベクトル X とベクトル B の一部が既知](note_gm_matrix_equation_type_c.md)
 次に示す，２つの対応の行列方程式，TypeC1とTypeC2 を対象としてプログラミングします。
 
 ![](_img/gm_matrix_equation_type_c1.gif)
